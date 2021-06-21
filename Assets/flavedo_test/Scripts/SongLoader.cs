@@ -300,7 +300,7 @@ public class SongLoader : MonoBehaviour
 							hammeron = (timestamp < previousNote.timestamp + (resolution / 2))&&(previousNote.fred!=fred) && (previousNote.timestamp != timestamp);
 						}
 					}
-					if (uint.Parse(noteSplitted[1]) < 5)
+					if (uint.Parse(noteSplitted[1]) < 4)
 					{
 						list.Add(new Song.Note(timestamp,fred , uint.Parse(noteSplitted[2]),timestamp<=starPowerEndsAt,hammeron));
 					}
@@ -311,7 +311,7 @@ public class SongLoader : MonoBehaviour
 					starPowerEndsAt = timestamp + uint.Parse(noteSplitted[2]);
 					//also set previous note to star
 					int traceBack = 1;
-					while (traceBack < 5)
+					while (traceBack < 4)
 					{
 						if (list[list.Count - traceBack].timestamp == timestamp)
 						{

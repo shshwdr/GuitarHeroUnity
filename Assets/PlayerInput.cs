@@ -20,7 +20,7 @@ public class PlayerInput
 	{
 		device = _device;
 		deviceId = _deviceId;
-		fred = new bool[5];
+		fred = new bool[4];
 	}
 	public void Update()
 	{
@@ -31,7 +31,7 @@ public class PlayerInput
 
 		fred[2] = Input.GetKey(KeyCode.I);
 		fred[3] = Input.GetKey(KeyCode.O);
-		fred[4] = Input.GetKey(KeyCode.P);
+		//fred[4] = Input.GetKey(KeyCode.P);
 		//fred[0] = XInput.GetButton(deviceId, XInput.Button.A);
 		//fred[1] = XInput.GetButton(deviceId, XInput.Button.B);
 		//fred[2] = XInput.GetButton(deviceId, XInput.Button.Y);

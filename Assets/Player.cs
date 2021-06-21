@@ -120,7 +120,7 @@ public class Player : MonoBehaviour
 		willRemoveBars = new List<BarInstance>();
 		nextLine = new Line();
 		nextLine.note = new List<NoteInstance>();
-		nextLine.fred = new bool[5];
+		nextLine.fred = new bool[4];
 
 		noteCounter.Initialize();
 
@@ -322,7 +322,7 @@ public class Player : MonoBehaviour
 			//	noteCounter.number = 0;
 			//	//Debug.Log("Strummed without a new line being available");
 			//}
-
+			//Debug.Log("no next line");
 			//check if notes are available
 			//only create line when it is a bit closer 
 			if (activeNotes.Count > 0&& (activeNotes[0].timestamp<(smoothTick+(window*2))))
@@ -332,7 +332,7 @@ public class Player : MonoBehaviour
 				nextLine.isHammerOn = activeNotes[0].hammeron;
 				//Debug.Log("Creating new line with timestamp "+nextLine.timestamp);
 				int i = 1;
-				while (i < 5) //check if more notes are on the same timestamp
+				while (i < 4) //check if more notes are on the same timestamp
 				{
 					if (i >= activeNotes.Count)
 					{
@@ -356,23 +356,24 @@ public class Player : MonoBehaviour
 					nextLine.fred[fred] = true;
 				}
 				nextLine.available = true;
-				//string debugNotes = "";
-				//for (int j = 0; j < nextLine.note.Count; ++j)
-				//{
-				//	debugNotes += nextLine.note[j].fred.ToString() + " ";
-				//}
-				//Debug.Log("Creating new line with notes "+ debugNotes);
+                string debugNotes = "";
+                for (int j = 0; j < nextLine.note.Count; ++j)
+                {
+                    debugNotes += nextLine.note[j].fred.ToString() + " ";
+                }
+                Debug.Log("Creating new line with notes "+ debugNotes);
 			}
 			else
 			{
-				//Debug.Log("No New Notes");
+				Debug.Log("No New Notes");
 			}
 		}
 
 		//Check if next line is available now
 		if (nextLine.available)
 		{
-			
+
+			Debug.Log("has next line");
 			bool correctColors = true;
 			//ignore freds lower than the lowest one in the next line, these are allowed to be pressed
 			for (int i = nextLine.lowestFred; i < playerInput.fred.Length; ++i)
@@ -443,7 +444,7 @@ public class Player : MonoBehaviour
 				Debug.Log("HIT");
 				for (int i = 0; i < nextLine.note.Count; ++i)
 				{
-					willRemove.Add(nextLine.note[i]);
+					//willRemove.Add(nextLine.note[i]);
 					uint fred = nextLine.note[i].fred;
 					flame[fred].gameObject.SetActive(true);
 					flame[fred].Reset();
@@ -463,7 +464,7 @@ public class Player : MonoBehaviour
 		}
 
 		//update note counter
-		//noteCounter.gameObject.SetActive(noteCounter.number > 30);
+		noteCounter.gameObject.SetActive(true);
 		noteCounter.UpdateCounter();
 
 		//if missed a note, do function again to check if next note is hit instead. but break combo

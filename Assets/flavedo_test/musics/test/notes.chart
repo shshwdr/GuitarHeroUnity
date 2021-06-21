@@ -1,8 +1,7 @@
 ﻿[Song]
 {
-  Name = "Nokken Violin"
-  Artist = "The Strokes"
-  Charter = "3-UP"
+  Name = "nokken"
+  Artist = "akuro"
   Offset = 0
   Resolution = 192
   Player2 = bass
@@ -27,4 +26,19 @@
   2976 = N 3 192
   3696 = N 1 0
   4848 = N 2 0
+  5808 = N 2 0
+  5856 = N 3 0
+  6048 = N 2 240
+  6288 = N 1 144
+  6768 = N 2 240
+  7152 = N 0 192
+  7536 = N 2 0
+  8064 = N 2 0
+  8112 = N 3 0
+  9120 = N 2 0
+  9168 = N 3 0
+  9216 = N 2 0
+  9264 = N 1 0
+  9888 = N 2 144
+  10320 = N 1 192
 }
