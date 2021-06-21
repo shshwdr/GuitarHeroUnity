@@ -250,14 +250,15 @@ public class Player : MonoBehaviour
 			//show correct sprite
 			SpriteRenderer spriteRenderer = noteInstance.noteModel.spriteRenderer;
 			NoteRenderer.FredSpriteData fredSpriteData = noteRenderer.spriteData.fred[noteInstance.fred];
-			if (noteInstance.star)
-			{
-				spriteRenderer.sprite = (noteInstance.hammeron) ? fredSpriteData.starHammerOn[frameIndex % 16] : fredSpriteData.star[frameIndex % 16];
-			}
-			else
-			{
-				spriteRenderer.sprite = (noteInstance.hammeron) ? fredSpriteData.hammerOn : fredSpriteData.normal;
-			}
+			//if (noteInstance.star)
+			//{
+			//	spriteRenderer.sprite = (noteInstance.hammeron) ? fredSpriteData.starHammerOn[frameIndex % 16] : fredSpriteData.star[frameIndex % 16];
+			//}
+			//else
+			//{
+			//	spriteRenderer.sprite = (noteInstance.hammeron) ? fredSpriteData.hammerOn : fredSpriteData.normal;
+			//}
+			spriteRenderer.sprite = fredSpriteData.normal;
 			if (endOfNoteInMeters < -1) //out of view
 			{
 				willRemove.Add(noteInstance);
@@ -316,11 +317,11 @@ public class Player : MonoBehaviour
 		if (!nextLine.available)
 		{
 			//check if strum bar is hit while there is no new line. this breaks combo
-			if (playerInput.strumPressed)
-			{
-				noteCounter.number = 0;
-				//Debug.Log("Strummed without a new line being available");
-			}
+			//if (playerInput.strumPressed)
+			//{
+			//	noteCounter.number = 0;
+			//	//Debug.Log("Strummed without a new line being available");
+			//}
 
 			//check if notes are available
 			//only create line when it is a bit closer 
@@ -383,7 +384,7 @@ public class Player : MonoBehaviour
 			//Check if strum has already been pressed, 
 			//if the colors are pressed on time afterwards it will register and exit here
 			//also check if hammerOn, then no strum will be necessary
-			if ((nextLine.strumPressed || nextLine.isHammerOn) && correctColors)
+			if (/*(nextLine.strumPressed || nextLine.isHammerOn) &&*/ correctColors)
 			{
 				nextLine.succes = true;
 				//Debug.Log("Pressed strum after holding correct colors");
@@ -391,29 +392,29 @@ public class Player : MonoBehaviour
 			else
 			{
 				//check for strum input
-				if (playerInput.strumPressed)
-				{
-					//Debug.Log("Strum Pressed");
-					//check if inside window
-					if (Mathf.Abs((float)(nextLine.timestamp - smoothTick)) <= window)
-					{
-						//Debug.Log("Inside of window! correct colors yet: " + correctColors);
-						//check if double strum pressed, this is a fail
-						if (nextLine.strumPressed) nextLine.fail = true;
-						nextLine.strumPressed = true;
-						if (correctColors && !nextLine.fail) nextLine.succes = true;
-					}
-					else
-					{
-						//strummed too early
-						//Debug.Log("Strummed too early");
-						noteCounter.number = 0;
-					}
-				}
-				else
-				{
-					//Debug.Log("Strum not pressed");
-				}
+				//if (playerInput.strumPressed)
+				//{
+				//	//Debug.Log("Strum Pressed");
+				//	//check if inside window
+				//	if (Mathf.Abs((float)(nextLine.timestamp - smoothTick)) <= window)
+				//	{
+				//		//Debug.Log("Inside of window! correct colors yet: " + correctColors);
+				//		//check if double strum pressed, this is a fail
+				//		if (nextLine.strumPressed) nextLine.fail = true;
+				//		nextLine.strumPressed = true;
+				//		if (correctColors && !nextLine.fail) nextLine.succes = true;
+				//	}
+				//	else
+				//	{
+				//		//strummed too early
+				//		//Debug.Log("Strummed too early");
+				//		noteCounter.number = 0;
+				//	}
+				//}
+				//else
+				//{
+				//	//Debug.Log("Strum not pressed");
+				//}
 			}
 
 			if ((nextLine.timestamp - smoothTick) < -window)
@@ -427,7 +428,7 @@ public class Player : MonoBehaviour
 			//Check if next line is succes or fail
 			if (nextLine.fail)
 			{
-				//Debug.Log("MISS");
+				Debug.Log("MISS");
 				for (int i = 0; i < nextLine.note.Count; ++i)
 				{
 					willRemove.Add(nextLine.note[i]);
@@ -439,7 +440,7 @@ public class Player : MonoBehaviour
 			}
 			if (nextLine.succes&&!nextLine.fail)
 			{
-				//Debug.Log("HIT");
+				Debug.Log("HIT");
 				for (int i = 0; i < nextLine.note.Count; ++i)
 				{
 					willRemove.Add(nextLine.note[i]);

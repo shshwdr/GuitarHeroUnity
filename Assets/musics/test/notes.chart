@@ -1,0 +1,30 @@
+﻿[Song]
+{
+  Name = "Nokken Violin"
+  Artist = "The Strokes"
+  Charter = "3-UP"
+  Offset = 0
+  Resolution = 192
+  Player2 = bass
+  Difficulty = 0
+  PreviewStart = 0
+  PreviewEnd = 0
+  Genre = "rock"
+  MediaType = "cd"
+  MusicStream = "song.ogg"
+}
+[SyncTrack]
+{
+  0 = TS 4
+  0 = B 120000
+}
+[Events]
+{
+}
+[ExpertSingle]
+{
+  2832 = N 2 144
+  2976 = N 3 192
+  3696 = N 1 0
+  4848 = N 2 0
+}
