@@ -17,6 +17,9 @@ public class Player : MonoBehaviour
 	public Pool pool;
 	public List<NoteInstance> activeNotes, willRemove;
 	public List<BarInstance> activeBars, willRemoveBars;
+
+	public List<NoteInstance> longNotes;
+	//public List<NoteInstance> longNotes;
 	public Line nextLine;
 	public Animation2D[] flame;
 	public GameObject[] fredHighlight;
@@ -261,7 +264,7 @@ public class Player : MonoBehaviour
 			spriteRenderer.sprite = fredSpriteData.normal;
 			if (endOfNoteInMeters < -1) //out of view
 			{
-				willRemove.Add(noteInstance);
+				//willRemove.Add(noteInstance);
 			}
 		}
 	}
@@ -444,7 +447,17 @@ public class Player : MonoBehaviour
 				Debug.Log("HIT");
 				for (int i = 0; i < nextLine.note.Count; ++i)
 				{
-					//willRemove.Add(nextLine.note[i]);
+                    if (nextLine.note[i].duration > 0)
+                    {
+						longNotes.Add(nextLine.note[i]);
+
+					}
+                    else
+                    {
+
+						willRemove.Add(nextLine.note[i]);
+					}
+					
 					uint fred = nextLine.note[i].fred;
 					flame[fred].gameObject.SetActive(true);
 					flame[fred].Reset();

@@ -33,36 +33,39 @@ public class SongScanning : MonoBehaviour
 
 	private IEnumerator ScanAndContinue(OnFinished onFinished)
 	{
-		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Game", LoadSceneMode.Single);
-		asyncLoad.allowSceneActivation = false;
-		Thread thread = new Thread(ScanForSongsRecursively);
-		thread.IsBackground = true;
-		thread.Start(new DirectoryInfo(Application.dataPath).Parent);
-		while (true)
-		{
-			yield return null;
-			lock (lockObject)
-			{
-				if (songs != null) break;
-			}
-		}
-		thread.Abort();
-		allSongs = songs;
-		while (asyncLoad.isDone)
-		{
-			Debug.Log("Still loading scene: " + asyncLoad.progress);
-			if (asyncLoad.progress >= 0.9) break;
-			yield return null;
-		}
+        //AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Game", LoadSceneMode.Single);
+        //asyncLoad.allowSceneActivation = false;
+        Thread thread = new Thread(ScanForSongsRecursively);
+        thread.IsBackground = true;
+        thread.Start(new DirectoryInfo(Application.dataPath).Parent);
+        while (true)
+        {
+            yield return null;
+            lock (lockObject)
+            {
+                if (songs != null) break;
+            }
+        }
+        thread.Abort();
+        allSongs = songs;
 
-		while (loadingImage.color.a > 0)
-		{
-			loadingImage.color -= new Color(0, 0, 0, Time.deltaTime);
-			yield return null;
-		}
+		FindObjectOfType<SongSelect>().Init();
+		yield return null;
+		//while (asyncLoad.isDone)
+  //      {
+  //          Debug.Log("Still loading scene: " + asyncLoad.progress);
+  //          if (asyncLoad.progress >= 0.9) break;
+  //          yield return null;
+  //      }
 
-		asyncLoad.allowSceneActivation = true;
-	}
+  //      while (loadingImage.color.a > 0)
+  //      {
+  //          loadingImage.color -= new Color(0, 0, 0, Time.deltaTime);
+  //          yield return null;
+  //      }
+
+  //      asyncLoad.allowSceneActivation = true;
+    }
 
 	private void ScanForSongsRecursively(object folder)
 	{

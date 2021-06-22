@@ -15,7 +15,7 @@ public class NoteCounter : MonoBehaviour
 		{
 			numberRenderer[i].time = 1;
 		}
-		gameObject.SetActive(false);
+		//gameObject.SetActive(false);
 	}
 	public void UpdateCounter()
 	{
@@ -40,9 +40,9 @@ public class NoteCounter : MonoBehaviour
 		}
 		else
 		{
-			showCounterAnimation = Mathf.Max(showCounterAnimation - (Time.deltaTime*3f), 0);
+			showCounterAnimation = Mathf.Max(showCounterAnimation + (Time.deltaTime*3f), 0);
 			transform.localPosition = Vector3.LerpUnclamped(hidePosition, showPosition, BackEaseOut(showCounterAnimation));
-			if(showCounterAnimation==0) gameObject.SetActive(false);
+			//if(showCounterAnimation==0) gameObject.SetActive(false);
 			//showCounterAnimation = Mathf.Max(showCounterAnimation - Time.deltaTime, 0f);
 		}
 		

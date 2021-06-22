@@ -10,38 +10,39 @@ public class SongSelect : MonoBehaviour
 	public SongBlock songblockPrefab;
 	public GameObject selectScreen;
 	public RawImage fade;
-	public void Awake()
+	public void Init()
 	{
-		songs = SongScanning.allSongs;
-		if (songs == null)
-		{
-			UnityEngine.SceneManagement.SceneManager.LoadScene(0, UnityEngine.SceneManagement.LoadSceneMode.Single);
-			return;
-		}
+		LoadSong(SongScanning.allSongs[1].fileInfo);
+		//songs = SongScanning.allSongs;
+		////if (songs == null)
+		////{
+		////	UnityEngine.SceneManagement.SceneManager.LoadScene(0, UnityEngine.SceneManagement.LoadSceneMode.Single);
+		////	return;
+		////}
 
-		fade.color = new Color(0, 0, 0, 1);
-		StartCoroutine(FadeOutStart());
+		//fade.color = new Color(0, 0, 0, 1);
+		//StartCoroutine(FadeOutStart());
 
 		
-		selectScreen.SetActive(true);
-		for (int i = 0; i < songs.Count; ++i)
-		{
-			SongBlock newBlock = Instantiate(songblockPrefab.gameObject).GetComponent<SongBlock>();
-			newBlock.transform.SetParent(songblockPrefab.transform.parent);
-			newBlock.transform.localPosition = Vector3.zero;
-			newBlock.transform.localScale = Vector3.one;
-			newBlock.text.text = songs[i].displayArtist;
-			newBlock.fileInfo = songs[i].fileInfo;
-		}
-		if (songs.Count == 0)
-		{
-			songblockPrefab.text.text = "No Songs found";
-			songblockPrefab.GetComponent<Button>().enabled = false;
-		}
-		else
-		{
-			songblockPrefab.gameObject.SetActive(false);
-		}
+		//selectScreen.SetActive(true);
+		//for (int i = 0; i < songs.Count; ++i)
+		//{
+		//	SongBlock newBlock = Instantiate(songblockPrefab.gameObject).GetComponent<SongBlock>();
+		//	newBlock.transform.SetParent(songblockPrefab.transform.parent);
+		//	newBlock.transform.localPosition = Vector3.zero;
+		//	newBlock.transform.localScale = Vector3.one;
+		//	newBlock.text.text = songs[i].displayArtist;
+		//	newBlock.fileInfo = songs[i].fileInfo;
+		//}
+		//if (songs.Count == 0)
+		//{
+		//	songblockPrefab.text.text = "No Songs found";
+		//	songblockPrefab.GetComponent<Button>().enabled = false;
+		//}
+		//else
+		//{
+		//	songblockPrefab.gameObject.SetActive(false);
+		//}
 	}
 
 	private IEnumerator FadeOutStart()
@@ -56,15 +57,15 @@ public class SongSelect : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Escape))
-		{
-			if (session.playing)
-			{
-				session.playing = false;
-				StartCoroutine(EndingSong());
+		//if (Input.GetKeyDown(KeyCode.Escape))
+		//{
+		//	if (session.playing)
+		//	{
+		//		session.playing = false;
+		//		StartCoroutine(EndingSong());
 			
-			}
-		}
+		//	}
+		//}
 	}
 
 	public void LoadSong(FileInfo chartFile)
